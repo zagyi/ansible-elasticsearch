@@ -29,13 +29,13 @@
 # Loop though elasticsearch_plugins and install them
 
 - name: plugins | Removing Old Plugins
-  shell: bin/plugin --remove {{ item.name }}
+  shell: bin/plugin remove {{ item.name }}
     chdir={{ elasticsearch_home_dir }}
   when: item.name is defined and item.reinstall is defined and item.reinstall == True
   with_items: elasticsearch_plugins
   ignore_errors: yes
 - name: plugins | Installing Plugins
-  shell: bin/plugin -install {{ item.name }} {{ '-url ' + item.url if item.url is defined else '' }}
+  shell: bin/plugin install {{ item.name }} {{ '-url ' + item.url if item.url is defined else '' }}
     chdir={{ elasticsearch_home_dir }}
   when: item.download_only is not defined
   with_items: elasticsearch_plugins
