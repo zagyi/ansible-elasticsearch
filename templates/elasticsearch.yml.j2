@@ -37,6 +37,8 @@ cluster.name: {{ elasticsearch_cluster_name }}
 # node.name: "Franz Kafka"
 {% if elasticsearch_node_name is defined %}
 node.name: {{ elasticsearch_node_name }}
+{% else %}
+node.name: {{ inventory_hostname }}
 {% endif %}
 
 # Every node can be configured to allow or deny being eligible as the master,
